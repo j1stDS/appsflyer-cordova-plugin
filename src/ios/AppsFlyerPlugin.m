@@ -877,7 +877,7 @@ static NSString *const NO_WAITING_TIME = @"You need to set waiting time for ATT"
 - (void)requestIDFAPrompt {
     // start is usually called here:
     // [[AppsFlyerLib shared] start];
-    if @available(iOS 14, *) {
+    if (@available(iOS 14, *)) {
 
       [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
         NSLog(@"Status: %lu", (unsigned long)status);
