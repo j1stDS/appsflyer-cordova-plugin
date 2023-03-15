@@ -390,6 +390,10 @@ if (!window.CustomEvent) {
         exec(null, null, 'AppsFlyerPlugin', 'setDisableNetworkData', [disable]);
     };
 
+    AppsFlyer.prototype.requestIDFAPrompt = function (disable){
+        exec(null, null, 'AppsFlyerPlugin', 'requestIDFAPrompt', []);
+    };
+
 
     module.exports = new AppsFlyer();
 })(window);
