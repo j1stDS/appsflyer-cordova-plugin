@@ -1,6 +1,8 @@
 #import "AppsFlyerPlugin.h"
 #import "AppsFlyerAttribution.h"
 #import "AppDelegate.h"
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+
 #if defined __has_include
 #  if __has_include (<FBSDKAppLinkUtility.h>)
 #       import <FBSDKAppLinkUtility.h>
@@ -870,6 +872,17 @@ static NSString *const NO_WAITING_TIME = @"You need to set waiting time for ATT"
     NSString *partnerId = (NSString*)[command.arguments objectAtIndex: 0];
     NSDictionary *data = (NSDictionary*)[command.arguments objectAtIndex: 1];
     [[AppsFlyerLib shared] setPartnerDataWithPartnerId:partnerId partnerInfo:data];
+}
+
+- (void)requestIDFAPrompt {
+    // start is usually called here:
+    // [[AppsFlyerLib shared] start];
+    if @available(iOS 14, *) {
+
+      [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+        NSLog(@"Status: %lu", (unsigned long)status);
+      }];
+    }
 }
 
 @end
