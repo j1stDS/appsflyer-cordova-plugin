@@ -32,7 +32,6 @@
 - (void)setAdditionalData:(CDVInvokedUrlCommand*)command;
 - (void)setSharingFilter:(CDVInvokedUrlCommand*)command __attribute__((deprecated));
 - (void)setSharingFilterForAllPartners:(CDVInvokedUrlCommand*)command __attribute__((deprecated));
-- (void)requestIDFAPrompt;
 
 @end
 

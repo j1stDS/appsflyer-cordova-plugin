@@ -66,6 +66,12 @@ static NSString *const NO_WAITING_TIME = @"You need to set waiting time for ATT"
         if ([isDeepLinkingValue isKindOfClass:[NSNumber class]]) {
             isDeepLinking = [(NSNumber*)isDeepLinkingValue boolValue];
         }
+
+        if (@available(iOS 14, *)) {
+          [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            NSLog(@"Status: %lu", (unsigned long)status);
+          }];
+        }
     }
 
     NSString* error = nil;
@@ -872,17 +878,6 @@ static NSString *const NO_WAITING_TIME = @"You need to set waiting time for ATT"
     NSString *partnerId = (NSString*)[command.arguments objectAtIndex: 0];
     NSDictionary *data = (NSDictionary*)[command.arguments objectAtIndex: 1];
     [[AppsFlyerLib shared] setPartnerDataWithPartnerId:partnerId partnerInfo:data];
-}
-
-- (void)requestIDFAPrompt {
-    // start is usually called here:
-    // [[AppsFlyerLib shared] start];
-    if (@available(iOS 14, *)) {
-
-      [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
-        NSLog(@"Status: %lu", (unsigned long)status);
-      }];
-    }
 }
 
 @end
